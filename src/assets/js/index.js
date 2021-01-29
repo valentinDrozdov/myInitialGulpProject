@@ -1,0 +1,1 @@
+import animScroll from './scrollAnimation'

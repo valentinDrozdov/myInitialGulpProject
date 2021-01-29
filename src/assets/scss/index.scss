@@ -1,0 +1,27 @@
+@import "mixins/mixins";
+@import "vars";
+@import "vendor";
+@import "fonts";
+@import "settings";
+@import "fonts";
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: Amsdam;//var(--bs-font);
+  font-style: italic;
+  color: var(--white);
+  background-color: #181818;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  @include breakpoint($tablet-bp) {
+    &.show-sidebar {
+      overflow: hidden;
+    }
+  }
+}
