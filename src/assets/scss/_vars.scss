@@ -1,10 +1,11 @@
-$tablet-bp: 991px;
-$mobile-bp: 733px;
-$sm-mobile-bp: 500px;
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 576px;
 $black: #000;
 
 :root {
-  --primary: #202020;
+  --primary: blue;
   --secondary: #0d0d0d;
   --white: #d2d2d2;
   --red: #ed3024;

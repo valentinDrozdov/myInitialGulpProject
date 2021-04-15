@@ -15,6 +15,8 @@ const webpackStream = require('webpack-stream')
 const woff = require('gulp-ttf2woff')
 const woff2 = require('gulp-ttf2woff2')
 const fs = require('fs')
+const gulpPug = require('gulp-pug')
+const gulp = require('gulp')
 
 let project_folder = 'dist'
 let source_folder = 'src'
@@ -38,6 +40,7 @@ let path = {
         img: source_folder + '/' + assets_folder + '/img/**/*.{svg, gif, ico}',
         svgImg: source_folder + '/' + assets_folder + '/img/**/*.svg',
         fonts: source_folder + '/' + assets_folder + '/fonts/**/*.ttf',
+        pug: source_folder + '/pug/pages/' + '*.pug',
     },
 
     observation: {
@@ -48,6 +51,8 @@ let path = {
         img: source_folder + '/' + assets_folder + '/img/**/*.{gif,svg,ico}',
         svg: source_folder + '/' + assets_folder + '/img/**/*.svg',
         fonts: source_folder + '/' + assets_folder + '/fonts/**/*.ttf',
+        pug: source_folder + '/pug/**/*.pug',
+
     },
 
     clean: './' + project_folder + '/',
@@ -86,6 +91,13 @@ function browsersync () {
 function html () {
     return src(path.src.html)
         .pipe(fileInclude())
+        .pipe(dest(path.build.html))
+        .pipe(browserSync.stream())
+}
+
+function pug () {
+    return src(path.src.pug)
+        .pipe(gulpPug())
         .pipe(dest(path.build.html))
         .pipe(browserSync.stream())
 }
@@ -140,6 +152,7 @@ function scss () {
 
 function imagesToWebp () {
     return src(path.src.imgToWebp)
+        .pipe(dest(path.build.img))
         .pipe(webpconv({
             quality: 70,
         }))
@@ -177,6 +190,7 @@ function watchFiles () {
     watch([path.observation.img], images)
     watch([path.observation.svg], sprite)
     watch([path.observation.fonts], fonts)
+    watch([path.observation.pug], pug)
 }
 
 function clean () {
@@ -209,7 +223,7 @@ function fontsStyle(done) {
 	done();
 }
 
-const build = series(clean, parallel(fonts, sprite, html, scss, js, images, imagesToWebp))
+const build = series(clean, parallel(fonts, sprite, html, pug, scss, js, images, imagesToWebp))
 const watching = parallel(build, watchFiles, browsersync)
 
 

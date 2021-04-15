@@ -9,19 +9,18 @@ html {
   font-size: 10px;
 }
 
-body {
-  font-family: Amsdam;//var(--bs-font);
-  font-style: italic;
-  color: var(--white);
-  background-color: #181818;
-
+body {1
   &.no-scroll {
     overflow: hidden;
   }
 
-  @include breakpoint($tablet-bp) {
+  @include breakpoint($lg) {
     &.show-sidebar {
       overflow: hidden;
     }
   }
 }
+
+@import "components/header";
+@import "components/burger";
+@import "components/footer";
