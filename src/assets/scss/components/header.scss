@@ -66,54 +66,38 @@
     max-width: 100%;
 
     @include breakpoint($lg) {
-      padding: 3em 0 4em 2em;
-      border-top: .05em solid var(--primary);
-      display: flex;
       position: absolute;
-      box-shadow: 0 8px 14px 0 rgba(0,0,0,.04);
       left: 0;
       top: 100%;
-      width: 100%;
+      z-index: 1001;
+      display: flex;
       flex-direction: column;
       align-items: start;
+      border-top: .05em solid var(--primary);
+      padding: 3em 0 4em 2em;
+      width: 100%;
+      box-shadow: 0 8px 14px 0 rgba(0,0,0,.04);
       background-color: #fff;
-      z-index: 1001;
       opacity: 0;
-      transition: opacity .4s ease-in-out;
       visibility: none;
       transform: translateX(-100%);
+      transition: opacity .4s ease-in-out;
 
       .menu-opened & {
         opacity: 1;
         visibility: visible;
-      transform: translateX(0%);
+        transform: translateX(0%);
       }
     }
 
     &-item {
-      position: relative;
       font-size: 1.2em;
       text-transform: uppercase;
       color: #aaa;
 
-      &::after {
-        width: 100%;
-
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 110%;
-        z-index: 1002;
-        width: 0;
-        height: .2em;
-        background-color: #000;
-        transition: all .3s ease-in-out;
-      }
-
-      &:hover::after {
-        transition: all .3s ease-in-out;
-      }
       a {
+        position: relative;
+        
         &::after {
           content: "";
           position: absolute;
